@@ -1,4 +1,4 @@
-# KryptoStream (JFrog DevSecOps Days 2024)
+# KryptoStream 
 
 <img src="https://raw.githubusercontent.com/etingertal/krypto-stream-app/refs/heads/main/public/images/kryptostream-logo.png" alt="KryptoStream" width="30%" style="margin: 20px;"/>
 
