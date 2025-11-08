@@ -1,4 +1,4 @@
-name: "sw-kryptostream-app"
+name: "jfrog-kryptostream-app"
 on: 
   workflow_dispatch:
     inputs:
@@ -42,6 +42,11 @@ on:
         type: string
         default: "INFO"
         description: "Set JFrog CLI Log level"
+      environment_set:
+        required: true
+        type: string
+        default: "swamp_main"
+        description: "what_env_to_use"
 permissions:
   actions: read           # for detecting the Github Actions environment
   id-token: write         # for creating OIDC tokens for signing
@@ -51,6 +56,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment_set }}
     env:
       DOCKER_REPO: ${{ github.event.inputs.rt_docker_repo }}
       IMAGE_NAME: ${{ github.event.inputs.docker_image_name }}
