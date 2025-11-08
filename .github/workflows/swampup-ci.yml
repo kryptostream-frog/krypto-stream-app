@@ -116,7 +116,7 @@ jobs:
           password: ${{ steps.setup-cli.outputs.oidc-token }}
       - name: Get URI 
         run: 
-          JF_URI=$(echo "${{ vars.JF_URL }}" | awk -F'://[^/]+' '{print $2}')
+          JF_URI=$(echo "${{ vars.JF_URL }}" | awk -F[/:] '{print $4}')
           echo JF_URI=$JF_URI >> $GITHUB_ENV
           echo ${{ env.JF_URI }}
       - name: Docker Build and Push
