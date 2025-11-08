@@ -117,7 +117,7 @@ jobs:
       - name: Get URI 
         run: 
           JF_URI=$(echo "${{ vars.JF_URL }}" | awk -F[/:] '{print $4}')
-          echo JF_URI
+          echo $JF_URI
           echo JF_URI=$JF_URI >> $GITHUB_ENV
           echo ${{ env.JF_URI }}
       - name: Docker Build and Push
