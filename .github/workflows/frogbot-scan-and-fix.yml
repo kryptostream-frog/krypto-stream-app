@@ -40,7 +40,7 @@ jobs:
         env:
           # [Mandatory]
           # JFrog platform URL
-          JF_URL: https://${{ vars.JF_URL }}/
+          JF_URL: ${{ vars.JF_URL }}
           JFROG_CLI_LOG_LEVEL: "DEBUG"
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
