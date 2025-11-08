@@ -118,7 +118,8 @@ jobs:
         run: 
           JF_URI=$(echo "${{ env.FULL_URL }}" | awk -F'://[^/]+' '{print $2}')
           echo JF_URI=$JF_URI >> $GITHUB_ENV
-          
+          echo ${{ env.JF_URI }}
+          echo $GITHUB_ENV
       - name: Docker Build and Push
         uses: docker/build-push-action@v5
         id: build
