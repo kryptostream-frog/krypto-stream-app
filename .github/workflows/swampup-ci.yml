@@ -118,17 +118,18 @@ jobs:
         run: 
           JF_URI=$(echo "${{ env.FULL_URL }}" | awk -F'://[^/]+' '{print $2}')
           echo JF_URI=$JF_URI >> $GITHUB_ENV
+          
       - name: Docker Build and Push
         uses: docker/build-push-action@v5
         id: build
         with:
           push: true
-          tags: ${{ vars.JF_URI }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
+          tags: ${{ env.JF_URI }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
           provenance: false
       
       - name: Docker Add Package to Build
         run: |  
-           echo "${{ vars.JF_URI }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}@${{ steps.build.outputs.digest }}" > metadata.json
+           echo "${{ env.JF_URI }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}@${{ steps.build.outputs.digest }}" > metadata.json
            jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
 
       - name: Docker Scan
