@@ -9,13 +9,25 @@ on:
         description: 'Release bundle name'     
         required: true
         default: "jfrog-kryptostream-app"
+      rb-stage:
+        description: 'to what stage to promote'     
+        required: true
+        default: "jfrog-kryptostream-app"  
+      environment_set:
+        required: true
+        type: choice
+        options:           
+          - QA
+          - PROD
+        default: "QA"
+        description: "Select to what stage promote the release bundle" 
 permissions:
   id-token: write
   contents: read
 
 jobs:
   Promote-to-qa-and-test:
-    environment: Jfrog
+    environment: ${{ github.event.inputs.environment_set }}
     runs-on: ubuntu-latest
     env:
       PROMOTE_REPO_NAME: ptfl-oci-dev-local
@@ -36,5 +48,5 @@ jobs:
 
       - name: Promote to Test
         run: |
-          jf release-bundle-promote ptt25-b-kryptostream-app-release-bundle ${{ inputs.rb-version }} QA --signing-key ${{ secrets.RB_KEY }} --sync=true 
+          jf release-bundle-promote  ${{ inputs.rb-name }} ${{ inputs.rb-version }} QA --signing-key ${{ secrets.RB_KEY }} --sync=true 
    
