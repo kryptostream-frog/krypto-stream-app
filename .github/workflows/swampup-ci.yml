@@ -168,4 +168,4 @@ jobs:
            echo 'Approval of Release bundle ${{ github.actor }}-evd-flow':'${{ github.run_number }} succeded' >> $GITHUB_STEP_SUMMARY
       - name: Promote to dev 
         run: |
-          jf release-bundle-promote ${{github.workflow}} ${{ github.run_number }}  DEV --signing-key ${{ secrets.RB_KEY }} --sync=true 
+          jf release-bundle-promote ${{github.workflow}}-release-bundle ${{ github.run_number }}  DEV --signing-key ${{ secrets.RB_KEY }} --sync=true 
