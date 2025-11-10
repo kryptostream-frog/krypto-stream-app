@@ -5,6 +5,10 @@ on:
       rb-version:
         description: 'Release bundle version'     
         required: true
+      rb-name:
+        description: 'Release bundle name'     
+        required: true
+        default: "jfrog-kryptostream-app"
 permissions:
   id-token: write
   contents: read
@@ -24,7 +28,7 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v4
         id: setup-cli
         env:
-          JF_URL: https://${{ vars.JF_URL }}/
+          JF_URL: ${{ vars.JF_URL }} 
           JF_PROJECT: ${{ vars.JF_PROJECT }}
         with:
             oidc-provider-name: ptfl-github

@@ -159,6 +159,11 @@ jobs:
           jf release-bundle-create ${{github.workflow}}-release-bundle ${{ github.run_number }} --signing-key ${{ secrets.RB_KEY }} --spec bundle-spec.json --sync=true 
           VER_LINK=${{ vars.JF_URL }}'/ui/artifactory/lifecycle/?bundleName='${{ github.workflow }}-release-bundle'&bundleToFlash='${{ github.workflow }}--release-bundle'&releaseBundleVersion='${{ github.run_number }}'&repositoryKey=release-bundles-v2&activeKanbanTab=promotion'
           echo '📦 Release bundle ['${{github.workflow}}-release-bundle:${{ github.run_number }}']('${VER_LINK}') created' >> $GITHUB_STEP_SUMMARY
+      
+      - name: Promote to dev 
+        run: |
+          jf release-bundle-promote ${{github.workflow}} ${{ inputs.rb-version }} DEV --signing-key ${{ secrets.RB_KEY }} --sync=true 
+       
       - name: Attach SAST output as evidence
         run: |
           jf audit --sast  --format sarif >> sast_results.json
