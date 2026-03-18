@@ -4,10 +4,18 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "author": "davidro@jfrog.com",
   "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  },
   "dependencies": {
     "cors.js": "0.0.1-security",
     "editor.md": "1.5.0",
@@ -17,6 +25,7 @@
     "moment": "2.29.0",
     "pm2": "5.3.0",
     "protobufjs": "^6.11.4",
-    "vm2": "3.9.4"
+    "vm2": "3.9.4",
+    "express-session": "^1.17.3"
   }
 }
